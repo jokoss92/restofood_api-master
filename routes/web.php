@@ -14,6 +14,13 @@
 // $router->get('/', function () use ($router) {
 //     return $router->app->version();
 // });
+$router->get('/', function () use ($router) {
+    return "Belajar Lumen";
+});
+
+$router->get('/hello', function () use ($router) {
+    return "Hello World";
+});
 
 $router->group([
     'prefix' => 'api'
@@ -45,5 +52,15 @@ $router->group([
         $router->post('/', 'CityController@store');
         $router->get('/', 'CityController@index');
         $router->delete('/{id}', 'CityController@delete');
+    });
+
+    $router->group([
+        'prefix' => 'cart'
+    ], function() use ($router) {
+        $router->get('/', 'CartController@index');
+        $router->post('/', 'CartController@store');
+        $router->get('/{id}', 'CartController@show');
+        $router->delete('/{id}', 'CartController@destroy');
+        $router->put('/{id}', 'CartController@update');
     });
 });
